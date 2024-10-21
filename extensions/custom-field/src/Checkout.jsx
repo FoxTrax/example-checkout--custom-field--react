@@ -7,7 +7,6 @@ import {
   useMetafield,
   Checkbox,
 } from "@shopify/ui-extensions-react/checkout";
-import { useDeliveryGroupListTarget } from "@shopify/ui-extensions-react/checkout";
 
 // [START custom-field.ext-index]
 // Set the entry point for the extension
@@ -15,6 +14,7 @@ export default reactExtension("purchase.checkout.shipping-option-list.render-aft
 // [END custom-field.ext-index]
 
 function App() {
+  console.log("App!!!!!!!!!!! OHHEHEHEHEHEEHEHHdJdhalkdsjfhasldkfjahsdflkjh");
   // [START custom-field.instruction-ui]
   // Set up the checkbox state
   const [checked, setChecked] = useState(false);
@@ -38,12 +38,6 @@ function App() {
   const applyMetafieldsChange = useApplyMetafieldsChange();
   // [END custom-field.update-metafield]
 
-  // Guard against duplicate rendering of `shipping-option-list.render-after` target for one-time purchase and subscription sections. Calling `applyMetafieldsChange()` on the same namespace-key pair from duplicated extensions would otherwise cause an overwrite of the metafield value.
-  // Instead of guarding, another approach would be to prefix the metafield key when calling `applyMetafieldsChange()`. The `deliveryGroupList`'s `groupType` could be used to such effect.
-  const deliveryGroupList = useDeliveryGroupListTarget();
-  if (!deliveryGroupList || deliveryGroupList.groupType !== 'oneTimePurchase') {
-    return null;
-  }
 
   // Set a function to handle the Checkbox component's onChange event
   const handleChange = () => {
